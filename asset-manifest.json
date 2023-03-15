@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ourpassassessment/static/css/main.bcf4c357.css",
+    "main.js": "/ourpassassessment/static/js/main.157e409f.js",
+    "static/js/787.ed12af9f.chunk.js": "/ourpassassessment/static/js/787.ed12af9f.chunk.js",
+    "static/media/inhouseicon.webp": "/ourpassassessment/static/media/inhouseicon.c72796d0a32e6889c047.webp",
+    "index.html": "/ourpassassessment/index.html",
+    "main.bcf4c357.css.map": "/ourpassassessment/static/css/main.bcf4c357.css.map",
+    "main.157e409f.js.map": "/ourpassassessment/static/js/main.157e409f.js.map",
+    "787.ed12af9f.chunk.js.map": "/ourpassassessment/static/js/787.ed12af9f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bcf4c357.css",
+    "static/js/main.157e409f.js"
+  ]
+}
