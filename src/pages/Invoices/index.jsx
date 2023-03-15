@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NavWrapper from '../../components/NavWrapper'
 import { CgOptions } from 'react-icons/cg'
 import { AiOutlinePlus } from 'react-icons/ai'
@@ -6,13 +6,26 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import './styles.css'
 
 function Invoices() {
+
+    const [details, setDetails] = useState({})
+
+    useEffect(() => {
+        fetch('/api/invoice')
+            .then(res => res.json())
+            .then(data => {
+                console.log("response data ", data)
+                setDetails(data)
+            })
+            .catch(err => console.log("invoice api err:", err))
+    }, [])
+
     return (
         <div style={{ marginBottom: "50px" }}>
             <NavWrapper >
                 <div className='container' >
                     <div>
                         <p className="split_nav_texts" >
-                            Invoice<span className="edit_inv_txt">/ edit invoice</span><span className="edit_inv_txt">(INV-2022-010)</span>
+                            Invoice<span className="edit_inv_txt">/ edit invoice</span><span className="edit_inv_txt">({details?.inv_id})</span>
                         </p>
                     </div>
 
@@ -22,30 +35,30 @@ function Invoices() {
                             <div style={{ display: 'flex', alignItems: 'flex-start' }} >
                                 <img alt="inv_logo" className='invoice_icon' src={require("../../assets/inhouseicon.webp")} />
                                 <div>
-                                    <p className='title' >Dipa Inhouse</p>
-                                    <p className='email'>hello@dipainhouse.com</p>
+                                    <p className='title' >{details?.company?.name}</p>
+                                    <p className='email'>{details?.company?.email}</p>
                                 </div>
                             </div>
                             <div >
-                                <p> Ijen Boulevard Street 101 </p>
-                                <p> malang city, 65115 </p>
-                                <p> East Java, Indonesia </p>
+                                <p> {details?.company?.address} </p>
+                                <p> {details?.company?.city} </p>
+                                <p> {details?.company?.country} </p>
                             </div>
                         </div>
 
                         <div className='inv_details' >
                             <div>
                                 <p>Invoice Number</p>
-                                <p>INV-2022-10</p>
-                                <p> <span className='slim' >Issued Date: </span> 11 Jan 2022</p>
-                                <p> <span className='slim'> Due Date: </span> 18 Jan 2022</p>
+                                <p>{details?.inv_id}</p>
+                                <p> <span className='slim' >Issued Date: </span> {details?.customer?.issued_date}</p>
+                                <p> <span className='slim'> Due Date: </span> {details?.customer?.due_date}</p>
                             </div>
 
                             <div>
                                 <p>Billed to</p>
-                                <p>Zaky Grizzly</p>
-                                <p> Monlight Agency LTD</p>
-                                <p> New  York, USA</p>
+                                <p>{details?.customer?.name}</p>
+                                <p> {details?.customer?.company}</p>
+                                <p> {details?.customer?.address}</p>
                             </div>
                         </div>
 
@@ -101,27 +114,27 @@ function Invoices() {
                             <div style={{ width: '100%' }} >
                                 <div className='items_list'>
                                     <div className="item_title_container">
-                                        <input placeholder='Payment Project - Monlight Mobile Design' />
+                                        <input placeholder={details?.items?.name} disabled />
                                     </div>
 
                                     <div className="others_container">
-                                        <input placeholder='120' />
+                                        <input placeholder={details?.items?.hours} disabled />
                                     </div>
 
                                     <div className="others_container">
-                                        <input placeholder='$40.00' />
+                                        <input placeholder={`$${details?.items?.rate}`} disabled />
                                     </div>
 
                                     <div className="others_container">
-                                        <input placeholder='$0.00' />
+                                        <input placeholder={`$${details?.items?.tax}`} disabled />
                                     </div>
 
                                     <div className="total_container">
-                                        <input placeholder='$4,800.00' />
+                                        <input placeholder={`$${parseFloat(parseFloat((details?.items?.rate) * parseInt(details?.items?.hours)) + parseFloat(details?.items?.tax)).toFixed(2)}`} disabled />
                                     </div>
 
                                 </div>
-                                <input className='description' placeholder='Description' />
+                                <input className='description' placeholder='Description' disabled />
                             </div>
                             <div className="last_container">
                                 <div>
@@ -142,9 +155,9 @@ function Invoices() {
 
                                         <div className='account_details'>
                                             <p>Wire Transfer</p>
-                                            <p>Account Name: <span className='bold_span'>Barly Vallendito</span></p>
-                                            <p>Account Number: <span className='bold_span'>9700 0023 4200 2900</span></p>
-                                            <p>Routing Number: <span className='bold_span'>084009519</span></p>
+                                            <p>Account Name: <span className='bold_span'>{details?.payment_method?.account_name}</span></p>
+                                            <p>Account Number: <span className='bold_span'>{details?.payment_method?.account_number}</span></p>
+                                            <p>Routing Number: <span className='bold_span'>{details?.payment_method?.routing_number}</span></p>
                                         </div>
                                     </div>
 
@@ -172,8 +185,8 @@ function Invoices() {
                                     <div>
                                         <p>$4,800.00</p>
                                         <div className='price_details'>
-                                            <p>$0.00</p>
-                                            <p>$0.00</p>
+                                            <p>${details?.discount}</p>
+                                            <p>${details?.tax}</p>
                                         </div>
                                     </div>
                                 </div>

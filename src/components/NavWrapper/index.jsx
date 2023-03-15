@@ -11,8 +11,7 @@ import { IoMdList } from 'react-icons/io';
 function NavBar({ children }) {
   const [activeTab, setActiveTab] = useState(window.location.pathname)
   const [displayNav, setDisplayNav] = useState(false)
-  
-  console.log("pathname ", window.location.pathname)
+    
   return (
     <div>
       {/* Navigation Bar */}
