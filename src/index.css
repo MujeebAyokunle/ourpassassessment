@@ -25,12 +25,13 @@ input:focus {
 
 .row {
   display: flex;
-  flex-direction: row;
+  flex-direction: row;  
   align-items: center
 }
 
 .space_out {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;  
 }

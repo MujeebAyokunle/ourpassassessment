@@ -18,7 +18,7 @@
 .info_container {
     margin-top: 30px;
     background-color: #fff;
-    border-radius: 10px;    
+    border-radius: 10px;
     padding: 20px 40px;
     width: 100%;
 }
@@ -121,18 +121,19 @@
     display: flex;
     flex-direction: row;
     margin-top: 30px;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .payment_container {
     width: 45%;
-    align-items: flex-start;    
+    align-items: flex-start;
     justify-content: space-between;
 }
 
 .payment_container2 {
-    width: 35%;    
-    margin-left: 10%;    
+    width: 35%;
+    margin-left: 10%;
     justify-content: space-between;
     align-items: flex-start;
 }
@@ -154,8 +155,8 @@
     font-weight: 600;
 }
 
-.payment_container2 > div > div:nth-child(2) > p {    
-    text-align: right;    
+.payment_container2 > div > div:nth-child(2) > p {
+    text-align: right;
 }
 
 .price_details > p {
@@ -205,16 +206,17 @@
     margin-top: 20px;
 }
 
-.account_details2, .price_details {
+.account_details2,
+.price_details {
     margin-top: 5px;
 }
 
-.account_details > p:first-child, .bold_span {
+.account_details > p:first-child,
+.bold_span {
     font-size: 14px;
     color: #000;
     font-weight: 600;
 }
-
 
 .account_details > p:not(:first-child) {
     font-size: 14px;
@@ -230,22 +232,13 @@
     color: #b0b3b9;
 }
 
-.item_title_container > input {
-    border: 1px solid #f0f0f0;
-    border-radius: 5px;
-    display: inline-block;
-    justify-content: flex-end;
-    width: 90%;
-    font-size: 12px;
-    padding: 10px;
-    margin-top: 20px;
-}
-
 .others_container {
     width: 12.5%;
 }
 
-.others_container > input {
+.others_container > input,
+.total_container > input,
+.item_title_container > input {
     border: 1px solid #f0f0f0;
     border-radius: 5px;
     display: inline-block;
@@ -263,17 +256,6 @@
 
 .total_container {
     width: 15%;
-}
-
-.total_container > input {
-    border: 1px solid #f0f0f0;
-    border-radius: 5px;
-    display: inline-block;
-    justify-content: flex-end;
-    width: 90%;
-    font-size: 12px;
-    padding: 10px;
-    margin-top: 20px;
 }
 
 .total_container > p {
@@ -303,6 +285,14 @@
     cursor: pointer;
 }
 
+.mobile {
+    display: none;
+}
+
+.none_mobile {
+    display: block;
+}
+
 .description {
     padding: 10px;
     margin-top: 10px;
@@ -320,4 +310,73 @@
 .last_container > p {
     font-size: 14px;
     color: #aeb1ba;
+}
+
+@media screen and (max-width: 448px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    .info_container {
+        margin-top: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px 10px;
+        width: 100%;        
+    }
+
+    .mobile_right {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .mobile_left {
+        width: 100%;
+    }
+
+    .mobile {
+        display: block;
+    }
+
+    .none_mobile {
+        display: none;
+    }
+
+    .others_container,
+    .total_container {
+        width: 25%;
+    }
+
+    .payment_container, .payment_container2 {
+        width: 100%;        
+        margin: 0%;
+    }
+
+    .payment_container2 {
+        margin-top: 25px;            
+    }
+
+    .total_container > input,
+    .item_title_container > input,
+    .others_container > input {
+        border: 1px solid #f0f0f0;
+        border-radius: 5px;
+        display: inline-block;
+        justify-content: flex-end;
+        width: 90%;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    .description {
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #f0f0f0;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .account_details {
+        margin-left: 10px;        
+    }
 }

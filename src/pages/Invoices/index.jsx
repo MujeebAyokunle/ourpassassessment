@@ -13,7 +13,6 @@ function Invoices() {
         fetch('/api/invoice')
             .then(res => res.json())
             .then(data => {
-                console.log("response data ", data)
                 setDetails(data)
             })
             .catch(err => console.log("invoice api err:", err))
@@ -32,14 +31,14 @@ function Invoices() {
                     {/* Invoice Information */}
                     <div className='info_container'>
                         <div className="space_out">
-                            <div style={{ display: 'flex', alignItems: 'flex-start' }} >
+                            <div className='mobile_left' style={{ display: 'flex', alignItems: 'flex-start' }} >
                                 <img alt="inv_logo" className='invoice_icon' src={require("../../assets/inhouseicon.webp")} />
                                 <div>
                                     <p className='title' >{details?.company?.name}</p>
                                     <p className='email'>{details?.company?.email}</p>
                                 </div>
                             </div>
-                            <div >
+                            <div className="mobile_right" >
                                 <p> {details?.company?.address} </p>
                                 <p> {details?.company?.city} </p>
                                 <p> {details?.company?.country} </p>
@@ -79,66 +78,148 @@ function Invoices() {
 
                         <hr color="#f0f0f0" className='line' />
 
-                        <div className="row">
-                            <div className="item_title_container">
-                                <p>Item Name</p>
+                        <div className='none_mobile' >
+                            <div className="row">
+                                <div className="item_title_container">
+                                    <p>Item Name</p>
+                                </div>
+
+                                <div className="others_container">
+                                    <p>Hours</p>
+
+                                </div>
+
+                                <div className="others_container">
+                                    <p>Rate/hr</p>
+
+                                </div>
+
+                                <div className="others_container">
+                                    <p>Tax</p>
+
+                                </div>
+
+                                <div className="total_container">
+                                    <p>Line Total</p>
+
+                                </div>
+
+                                <div>
+                                    <p>&nbsp;</p>
+
+                                </div>
                             </div>
 
-                            <div className="others_container">
-                                <p>Hours</p>
+                            <div className="row">
+                                <div style={{ width: '100%' }} >
+                                    <div className='items_list'>
+                                        <div className="item_title_container">
+                                            <input placeholder={details?.items?.name} disabled />
+                                        </div>
 
-                            </div>
+                                        <div className="others_container">
+                                            <input placeholder={details?.items?.hours} disabled />
+                                        </div>
 
-                            <div className="others_container">
-                                <p>Rate/hr</p>
+                                        <div className="others_container">
+                                            <input placeholder={`$${details?.items?.rate}`} disabled />
+                                        </div>
 
-                            </div>
+                                        <div className="others_container">
+                                            <input placeholder={`$${details?.items?.tax}`} disabled />
+                                        </div>
 
-                            <div className="others_container">
-                                <p>Tax</p>
+                                        <div className="total_container">
+                                            <input placeholder={`$${parseFloat(parseFloat((details?.items?.rate) * parseInt(details?.items?.hours)) + parseFloat(details?.items?.tax)).toFixed(2)}`} disabled />
+                                        </div>
 
-                            </div>
-
-                            <div className="total_container">
-                                <p>Line Total</p>
-
-                            </div>
-
-                            <div>
-                                <p>&nbsp;</p>
-
+                                    </div>
+                                    <input className='description' placeholder='Description' disabled />
+                                </div>
+                                <div className="last_container">
+                                    <div>
+                                        <AiOutlinePlus color="#fff" className='plus' />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="row">
-                            <div style={{ width: '100%' }} >
-                                <div className='items_list'>
-                                    <div className="item_title_container">
-                                        <input placeholder={details?.items?.name} disabled />
-                                    </div>
+                        <div className='mobile' >
+                            {/* First row */}
+                            <div className="row">
+                                <div className="item_title_container">
+                                    <p>Item Name</p>
+                                </div>
 
-                                    <div className="others_container">
-                                        <input placeholder={details?.items?.hours} disabled />
-                                    </div>
-
-                                    <div className="others_container">
-                                        <input placeholder={`$${details?.items?.rate}`} disabled />
-                                    </div>
-
-                                    <div className="others_container">
-                                        <input placeholder={`$${details?.items?.tax}`} disabled />
-                                    </div>
-
-                                    <div className="total_container">
-                                        <input placeholder={`$${parseFloat(parseFloat((details?.items?.rate) * parseInt(details?.items?.hours)) + parseFloat(details?.items?.tax)).toFixed(2)}`} disabled />
-                                    </div>
+                                <div className="others_container">
+                                    <p>Hours</p>
 
                                 </div>
-                                <input className='description' placeholder='Description' disabled />
+
+                                <div className="others_container">
+                                    <p>Rate/hr</p>
+
+                                </div>
+                         
                             </div>
-                            <div className="last_container">
+
+                            <div className="row">
+                                <div style={{ width: '100%' }} >
+                                    <div className='items_list'>
+                                        <div className="item_title_container">
+                                            <input placeholder={details?.items?.name} disabled />
+                                        </div>
+
+                                        <div className="others_container">
+                                            <input placeholder={details?.items?.hours} disabled />
+                                        </div>
+
+                                        <div className="others_container">
+                                            <input placeholder={`$${details?.items?.rate}`} disabled />
+                                        </div>
+
+                                    </div>                                    
+                                </div>
+                            </div>
+
+                            {/* Second row */}
+                            <div className="row">                
+
+                                <div className="others_container">
+                                    <p>Tax</p>
+
+                                </div>
+
+                                <div className="total_container">
+                                    <p>Line Total</p>
+
+                                </div>
+
                                 <div>
-                                    <AiOutlinePlus color="#fff" className='plus' />
+                                    <p>&nbsp;</p>
+
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div style={{ width: '100%' }} >
+                                    <div className='items_list'>                           
+
+                                        <div className="others_container">
+                                            <input placeholder={`$${details?.items?.tax}`} disabled />
+                                        </div>
+
+                                        <div className="total_container">
+                                            <input placeholder={`$${parseFloat(parseFloat((details?.items?.rate) * parseInt(details?.items?.hours)) + parseFloat(details?.items?.tax)).toFixed(2)}`} disabled />
+                                        </div>
+
+                                    </div>
+                                    <input className='description' placeholder='Description' disabled />
+                                </div>
+                                <div className="last_container">
+                                    <div>
+                                        <AiOutlinePlus color="#fff" className='plus' />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +264,7 @@ function Invoices() {
 
                                     </div>
                                     <div>
-                                        <p>$4,800.00</p>
+                                        <p>{`$${parseFloat(parseFloat((details?.items?.rate) * parseInt(details?.items?.hours)) + parseFloat(details?.items?.tax)).toFixed(2)}`}</p>
                                         <div className='price_details'>
                                             <p>${details?.discount}</p>
                                             <p>${details?.tax}</p>
@@ -197,7 +278,7 @@ function Invoices() {
                                         <p>Total Amount</p>
                                     </div>
                                     <div>
-                                        <p>$4,800.00</p>
+                                        <p>{`$${parseFloat(parseFloat((details?.items?.rate) * parseInt(details?.items?.hours)) + parseFloat(details?.items?.tax) - parseInt(details?.discount) + parseInt(details?.tax)).toFixed(2)}`}</p>
                                     </div>
                                 </div>
                             </div>

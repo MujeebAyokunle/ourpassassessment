@@ -53,7 +53,6 @@
     display: none
 }
 
-
 @media screen and (max-width: 992px) {
     .mobile_nav_button {
         display: block;
@@ -85,5 +84,21 @@
 
     .nav_button {
         padding: 15px 20px;
+    }
+}
+
+@media screen and (max-width: 448px) {
+    .mobile_nav_button {
+        display: block;
+        position: absolute;
+        right: 5px;    
+    }
+
+    .logo {
+        font-size: 28px;
+        position: absolute;
+        left: 10px;
+        font-weight: bolder;
+        color: #30307e;
     }
 }
